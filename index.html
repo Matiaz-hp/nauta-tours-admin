@@ -1,102 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reservas de Hospedaje | Nauta Tours</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <meta charset="UTF-8" />
+  <title>Login Admin | Nauta Tours</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body class="login-body">
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Nauta Tours</div>
-    <div class="menu-toggle" id="menu-toggle">☰</div>
-    <ul class="menu" id="menu">
-      <li><a href="#hoteles">Hoteles</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-    <div class="auth">
-      <span id="user-name"></span>
-      <button id="login-btn">Iniciar Sesión</button>
-      <button id="register-btn">Registrarse</button>
-      <button id="logout-btn" style="display:none;">Cerrar Sesión</button>
-    </div>
-  </nav>
+  <div class="login-container">
+    <h1>Nauta Tours</h1>
+    <h2>Panel Administrativo</h2>
 
-  <!-- Banner Hero -->
-  <section id="banner">
-    <div class="overlay"></div>
-    <div class="banner-content">
-      <h1>Encuentra tu hospedaje ideal en Nauta, Loreto</h1>
-      <p>Reserva hoteles, apartamentos y más en tu destino favorito</p>
-      <button onclick="document.getElementById('hoteles').scrollIntoView({behavior:'smooth'})">Ver Hoteles</button>
-    </div>
+    <form id="loginForm">
+      <input type="email" placeholder="Correo administrador" required />
+      <input type="password" placeholder="Contraseña" required />
 
-    <!-- Buscador -->
-    <div id="buscador">
-      <input type="text" id="search-input" placeholder="Buscar hotel por nombre">
-      <input type="text" id="fecha-reserva" placeholder="Selecciona fecha">
-      <button id="search-btn">Buscar</button>
-    </div>
-  </section>
+      <button type="submit">Ingresar</button>
+    </form>
 
-  <!-- Sección Hoteles -->
-  <section id="hoteles">
-    <h2 class="section-title">Hoteles Disponibles</h2>
-    <div class="hoteles-grid" id="hoteles-list">
-      <!-- Cards generadas dinámicamente -->
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Nauta Tours | Todos los derechos reservados
-  </footer>
-
-  <!-- Modales Login/Registro -->
-  <div id="login-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('login-modal').style.display='none'">&times;</span>
-      <h2>Iniciar Sesión</h2>
-      <form id="login-form">
-        <input type="email" id="login-email" placeholder="Correo" required>
-        <input type="password" id="login-password" placeholder="Contraseña" required>
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-      <button id="google-login">Continuar con Google</button>
-    </div>
+    <p class="info">
+      Acceso exclusivo para administradores
+    </p>
   </div>
 
-  <div id="register-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('register-modal').style.display='none'">&times;</span>
-      <h2>Registrarse</h2>
-      <form id="register-form">
-        <input type="text" id="register-name" placeholder="Nombre" required>
-        <input type="email" id="register-email" placeholder="Correo" required>
-        <input type="password" id="register-password" placeholder="Contraseña" required>
-        <button type="submit">Registrarse</button>
-      </form>
-      <button id="google-register">Continuar con Google</button>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script type="module" src="scripts/firebase-config.js"></script>
-  <script type="module" src="scripts/auth.js"></script>
-  <script type="module" src="scripts/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script>
-    // Menu toggle responsive
-    const menuToggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', ()=>{ menu.classList.toggle('active'); });
-
-    // Inicializar calendario
-    flatpickr("#fecha-reserva",{dateFormat:"Y-m-d"});
-  </script>
 </body>
 </html>
+
 
