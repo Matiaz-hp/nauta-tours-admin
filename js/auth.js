@@ -20,6 +20,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     await signInWithEmailAndPassword(auth, email, password);
     window.location.href = "dashboard.html";
   } catch (error) {
-    alert("Credenciales incorrectas");
+    alert("Correo o contraseña incorrectos");
   }
 });
