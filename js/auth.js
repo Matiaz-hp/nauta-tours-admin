@@ -1,32 +1,61 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
-// js/auth.js
-import { auth, db } from "./firebase.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+// 🔥 Configuración Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCgVrsHW7MzvwKBiIXXqt2zHeI9NpJ7pp8",
+  authDomain: "nauta-tours.firebaseapp.com",
+  projectId: "nauta-tours",
+  storageBucket: "nauta-tours.firebasestorage.app",
+  messagingSenderId: "896950306295",
+  appId: "1:896950306295:web:59e2a677fc9efab6b69af2"
+};
 
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// 🎯 Login admin
 const form = document.getElementById("loginForm");
 
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const email = form.querySelector('input[type="email"]').value;
-    const password = form.querySelector('input[type="password"]').value;
+  const email = form.querySelector('input[type="email"]').value;
+  const password = form.querySelector('input[type="password"]').value;
 
-    try {
-      const cred = await signInWithEmailAndPassword(auth, email, password);
+  try {
+    // Login
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
 
-      const uid = cred.user.uid;
-      const userRef = doc(db, "users", uid);
-      const snap = await getDoc(userRef);
+    console.log("✅ Usuario autenticado:", user.uid);
 
-      if (!snap.exists() || snap.data().role !== "admin") {
-        throw new Error("Acceso no autorizado");
-      }
+    // Buscar en Firestore
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
 
-      window.location.href = "dashboard.html";
-    } catch (error) {
-      alert(error.message);
+    console.log("📄 Existe documento:", userSnap.exists());
+
+    if (!userSnap.exists()) {
+      alert("Usuario no registrado como administrador");
+      return;
     }
-  });
-}
+
+    const userData = userSnap.data();
+    console.log("🧾 Datos Firestore:", userData);
+
+    // Validar rol
+    if (userData.role === "admin") {
+      window.location.href = "dashboard.html";
+    } else {
+      alert("Acceso no autorizado");
+    }
+
+  } catch (error) {
+    console.error("❌ Error login:", error);
+    alert("Credenciales incorrectas");
+  }
+});
