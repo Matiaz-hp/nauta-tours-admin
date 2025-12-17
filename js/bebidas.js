@@ -1,5 +1,6 @@
 import { supabase } from "./supabase_cliente.js";
 
+
 /* ===============================
    ELEMENTOS
 ================================ */
