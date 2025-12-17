@@ -1,4 +1,4 @@
-import { supabase } from "../pages/supabase_cliente.js";
+import { supabase } from "./supabase_cliente.js";
 
 /* ===============================
    ELEMENTOS
