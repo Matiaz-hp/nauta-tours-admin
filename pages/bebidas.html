@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Lugares Turísticos | Admin</title>
+  <title>Bebidas Típicas | Admin</title>
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
 
   <header class="admin-header">
     <h1>Nauta Tours</h1>
-    <button class="logout-btn">Cerrar sesión</button>
+    <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
   </header>
 
   <div class="admin-layout">
@@ -19,23 +19,52 @@
         <a href="lugares.html">Lugares turísticos</a>
         <a href="hospedajes.html">Hospedajes</a>
         <a href="comidas.html">Comidas típicas</a>
-        <a href="bebidas.html">Bebidas típicas</a>
+        <a href="bebidas.html" class="active">Bebidas típicas</a>
         <a href="comentarios.html">Comentarios</a>
       </nav>
     </aside>
 
     <main class="admin-content">
-<h2>Bebidas Típicas</h2>
-<p>Aquí el administrador podrá gestionar las bebidas típicas.</p>
+      <h2>Bebidas Típicas</h2>
+      <p>Gestión de bebidas típicas (Supabase)</p>
 
-      <button class="primary-btn">Agregar lugar</button>
+      <!-- FORMULARIO -->
+      <form id="bebidaForm" class="form-box">
+        <input type="text" id="nombre" placeholder="Nombre de la bebida" required />
+        <textarea id="descripcion" placeholder="Descripción"></textarea>
+        <input type="file" id="imagen" accept="image/*" required />
 
+        <button type="submit" class="primary-btn">
+          Agregar bebida
+        </button>
+      </form>
+
+      <!-- TABLA -->
       <div class="table-box">
-        <p>No hay datos aún.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Activo</th>
+            </tr>
+          </thead>
+          <tbody id="bebidasTable">
+            <tr>
+              <td colspan="4">Cargando...</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
   </div>
 
+  <!-- Protección -->
+  <script src="../js/guard.js"></script>
+
+  <!-- Lógica bebidas -->
+  <script type="module" src="../js/bebidas.js"></script>
+
 </body>
 </html>
-
